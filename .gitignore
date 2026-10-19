@@ -1,0 +1,33 @@
+# Nextflow
+data/plates
+data/sample_sheets*
+work/
+work_test/
+results/
+results_test/
+results_design/
+.nextflow/
+.nextflow.log*
+.nextflow.pid
+*.nextflow.log*
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Editors and OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# The specimen data and the bench record ship with this repository, because
+# the analysis is not reproducible without them. Uncomment to keep them
+# private; the test profile still exercises the whole workflow on the
+# synthetic fixture in tests/data/.
+# data/plates/
+# data/sample_sheets/
+# data/metadata/

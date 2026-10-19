@@ -1,0 +1,67 @@
+# Pinned configuration for the reportable run.
+#   nextflow run main.nf -params-file conf/params.yaml -profile conda
+plates:       'data/plates/*.xlsx'
+sample_sheet: 'data/sample_sheet.xlsx'
+specimens:    'data/sample_sheet.xlsx'   # only read with --randomise
+outdir:       'results'
+
+# Primary calling rule
+cq_positive_max: 38.0      # Cq at or below which a target is positive
+cq_trace_max:    40.0      # upper bound of the trace band; trace is NOT positive
+cqconf_targets:  'Pm'      # targets that must also clear the Cq-confidence floor
+cqconf_min:      0.50
+# Primary specificity rule. Targets listed here cannot be called positive in a
+# mosquito where the dominant target (Pf) is positive: Pm and Po share a
+# conserved reverse primer, and 92.6% of Po positives co-occur with Pf at a
+# median delay of +3.1 cycles.
+# Set to 'Pm,Po' to apply the rule to both shared-primer targets.
+codetection_exclude: 'Po'
+restrict_to_metadata: true # analyse only specimens present in the metadata
+# Column in the specimens tab holding the plate Sample Name. Here
+# 'sample_code' (NS003) joins directly; 'sample_id' is a composite
+# (NS003NIH00124L) and would need the pattern below to extract its joinable
+# part.
+metadata_key: 'sample_code'
+metadata_key_pattern: null   # e.g. '^([A-Za-z]+_?\d+)'
+
+# Sensitivity arm only. Never alters the primary call.
+guardband_grid: '0,1,2,3,5'
+
+# Internal positive control. Not incorporated during the study period
+# (assay design §10), so the report carries the count of specimens with no
+# signal at any target instead of a true-negative claim.
+ipc_enabled: false
+ipc_target:  'IPC'
+ipc_cq_max:  32.0
+
+# Standard-curve acceptance (assay design §4, §9)
+miqe_r2_min:    0.99
+miqe_eff_min:   90.0
+miqe_eff_max:  110.0
+miqe_slope_min: -3.58
+miqe_slope_max: -3.10
+
+# Control acceptance (assay design §5, §9)
+ctl_amplification_max: 40.0   # a control well at or below this Cq amplified
+pos_ctl_cq_tolerance:  2.0    # cycles either side of the run-wide median
+
+# Sample-sheet reconciliation. Assigned specimens with no record in the
+# specimens tab: 13 here, a documented gap. Above this the run stops, because
+# a broken join and a handful of gaps look identical to a silent intersection.
+max_unmatched_specimens: 20
+
+# Randomisation and plate-structure checks
+balance_strata: 'bioclimatic_zone,collection_method,collection_location,year'
+icc_groups:     'plate,collection_location,bioclimatic_zone'
+max_level_share: 0.75
+n_perm: 2000
+seed:   42
+
+# Design-time allocation, recorded for provenance. The analysis reads the
+# frozen allocation from the sample sheet; this seed is what produced it.
+randomisation_seed: 20261001
+n_plates:          60
+slots_per_plate:   12
+
+allow_ingest_drift:       false   # never true for a reportable run
+allow_plate_map_mismatch: false   # never true for a reportable run

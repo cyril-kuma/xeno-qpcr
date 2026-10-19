@@ -1,0 +1,6 @@
+Placeholder standing in for an absent optional input.
+
+Nextflow processes take file inputs, not optional ones, so an optional input
+is passed as this file and the process checks its name. The replicate
+concordance stage treats it as "no first-round call table supplied" and
+reports that comparison as not performed.

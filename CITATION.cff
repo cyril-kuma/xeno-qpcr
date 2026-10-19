@@ -1,0 +1,59 @@
+cff-version: 1.2.0
+title: >-
+  xeno-qpcr: Plasmodium 18S singleplex qPCR detection in blood-fed
+  Anopheles gambiae sensu lato
+message: If you use this software, please cite it as below.
+type: software
+authors:
+  - family-names: Atetteh
+    given-names: Stephen
+version: 1.1.0
+license: MIT
+repository-code: https://github.com/stephenatetteh/xeno-qpcr
+abstract: >-
+  A Nextflow workflow taking raw QuantStudio exports of singleplex 18S rRNA
+  TaqMan qPCR assays for Plasmodium falciparum, P. malariae and P. ovale
+  through MIQE standard-curve and control quality control to zone-stratified
+  prevalence estimates. The workflow validates that the plates which ran
+  match the randomised sample-to-plate assignment, gates each control class
+  separately, applies a documented calling rule in which trace is not
+  positive, reports a cross-amplification sensitivity arm, and reports
+  whether the randomisation decorrelated plate from collection site,
+  bioclimatic zone, collection method and year.
+keywords:
+  - Plasmodium
+  - Anopheles gambiae
+  - qPCR
+  - MIQE
+  - Nextflow
+  - malaria
+  - vector biology
+  - blood meal
+references:
+  - type: article
+    authors:
+      - family-names: Bustin
+        given-names: Stephen A.
+    title: >-
+      The MIQE guidelines: minimum information for publication of
+      quantitative real-time PCR experiments
+    journal: Clinical Chemistry
+    volume: 55
+    issue: 4
+    start: 611
+    end: 622
+    year: 2009
+  - type: article
+    authors:
+      - family-names: Shokoples
+        given-names: Sandra E.
+    title: >-
+      Multiplexed real-time PCR assay for discrimination of Plasmodium
+      species with improved sensitivity over other real-time and
+      conventional nested PCR-based methods
+    journal: Journal of Clinical Microbiology
+    volume: 47
+    issue: 4
+    start: 975
+    end: 980
+    year: 2009

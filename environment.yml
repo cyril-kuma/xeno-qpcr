@@ -1,0 +1,15 @@
+name: xeno-qpcr
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pandas=2.2
+  - numpy=1.26
+  - scipy=1.13
+  - statsmodels=0.14
+  - openpyxl=3.1
+  # QuantStudio exports carry a malformed workbookView attribute that
+  # openpyxl rejects on 57 of the 60 plates here; calamine reads them.
+  - python-calamine=0.2
+  - tabulate=0.9
+  - pytest=8.2
